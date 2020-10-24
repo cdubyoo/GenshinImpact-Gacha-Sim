@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import star5_data from '../data/star5_data'
+import star5_data from '../data/5star'
 
 
 

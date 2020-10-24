@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import star5_data from '../data/star5_data'
+
 
 
 export default function Rolls(props) {
     const [roll, setRoll] = useState(null)
+    const [pityCount, setPityCount] = useState(0)
+    console.log(star5_data)
 
 
     // handler for single roll

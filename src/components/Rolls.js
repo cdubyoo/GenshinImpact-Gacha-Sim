@@ -1,58 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import star5_data from '../data/5star'
+import fiveStarData from '../data/5star'
+import fourStarData from '../data/4star'
+import threeStarData from '../data/3star'
 
 
 
 export default function Rolls(props) {
     const [roll, setRoll] = useState(null)
-    const [pityCount, setPityCount] = useState(0)
-
-    // pulls random object from data array
-    const random = Math.floor(Math.random() * star5_data.length)
-    console.log(random, star5_data[random])
+    const [tenPityCount, setTenPityCount] = useState(0)
+    const [ninetyPityCount, setNinetyPityCount] = useState(0)
 
 
     // handler for single roll
     const handleSingleRoll = () => {
         // sets the main rolling RNG
         const rng = Math.floor(Math.random() * 1000) +1
-        // sets the rng for each item depending on star level
-        const fiveStarRng = Math.floor(Math.random() * 15) + 1 // 15 items total
-        const fourStarRng = Math.floor(Math.random() * 32) + 1 // 32 items total
-        const threeStarRng = Math.floor(Math.random() * 13) + 1 // 13 items total 
+        // pulls a random item from the data set for each star rating
+        const randomFiveStar = Math.floor(Math.random() * fiveStarData.length) 
+        const randomFourStar = Math.floor(Math.random() * fourStarData.length)
+        const randomThreeStar = Math.floor(Math.random() * threeStarData.length)
         
+        // check if ten pity count has hit
+        if (tenPityCount === 9) {
+            setRoll(fourStarData[randomFourStar].name)
+            setTenPityCount(0)
+            console.log('obtained a 4 star through pity')
+            return;
+        } 
+
+        // check if 90 pity count has hit
+        if (ninetyPityCount === 89) {
+            setRoll(fiveStarData[randomFiveStar].name)
+            setNinetyPityCount(0)
+            console.log('obtained a 5 star through pity')
+            return;
+        } 
+
         // check if rng hit 5 star which is 0.6%
         if (rng <= 6) {
-            setRoll(fiveStarRng)
-            console.log('obtained 5 star')
+            setRoll(fiveStarData[randomFiveStar].name)
+            setNinetyPityCount(0)
+            console.log('obtained a 5 star, resetting pity')
         // check if rng hit 4 star which is 5.1%
         } else if (rng <= 51) {
-            setRoll(fourStarRng)
-            console.log('obtained 4 star')
+            setRoll(fourStarData[randomFourStar].name)
+            setTenPityCount(0)
+            // only increment for 90 pity counter b/c 10 pity resets upon hitting 4 star
+            setNinetyPityCount(prevState => prevState +1)
+            console.log('obtained a 4 star, resetting pity')
         // anything else is a 3 star
         } else {
-            setRoll(threeStarRng)
-            console.log('obtained 3 star')
-            
+            setRoll(threeStarData[randomThreeStar].name)
+            // pity counter increment for both
+            setTenPityCount(prevState => prevState + 1)
+            setNinetyPityCount(prevState => prevState +1)
+            console.log('obtained a 3 star, pity counter ++')
         }
     }
-        
-
-
+    
+    const handleTenRoll = () => {
+        for (let i = 0; i < 10; i++) {
+            handleSingleRoll()
+        }
+    }
+    
     return (
         <>
         <div>
             <span>
                 <button onClick={handleSingleRoll} className='btn btn-primary mr-2'>Wish x1</button>
-                <button className='btn btn-primary mr-2'>Wish x10</button>
+                <button onClick={handleTenRoll} className='btn btn-primary mr-2'>Wish x10</button>
                 <button className='btn btn-danger'>Reset</button>
             </span>
         </div>
 
         <div>
-            <ul>
-               Roll # = {roll}
-            </ul>
+               
+          
+               Ten Pity Count = {tenPityCount}
+            <br></br>
+               Ninety Pity Count = {ninetyPityCount}
+            <br></br>
+                Rolls = {roll}
         </div>
         </>
     )

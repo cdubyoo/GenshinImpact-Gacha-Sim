@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './App.css';
-import Rolls from './components/Rolls.js'
+import Rolls from './components/Rolls'
 
 function App() {
   return (
     <>
-      < Rolls />
+    <div className="App-header">
+      <Rolls />
+      </div>
     </>
   );
 }

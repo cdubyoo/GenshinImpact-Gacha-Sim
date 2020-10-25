@@ -6,7 +6,10 @@ import star5_data from '../data/5star'
 export default function Rolls(props) {
     const [roll, setRoll] = useState(null)
     const [pityCount, setPityCount] = useState(0)
-    console.log(star5_data)
+
+    // pulls random object from data array
+    const random = Math.floor(Math.random() * star5_data.length)
+    console.log(random, star5_data[random])
 
 
     // handler for single roll

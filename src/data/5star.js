@@ -2,7 +2,8 @@ export default [
     {
         'id': 0,
         'type' : 'character',
-        'name' : 'Keqing'
+        'name' : 'Keqing',
+        'image': ''
     },
     {
         'id': 1,

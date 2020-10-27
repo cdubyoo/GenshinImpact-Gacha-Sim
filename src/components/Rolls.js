@@ -11,9 +11,10 @@ export default function Rolls(props) {
     const [ninetyPityCount, setNinetyPityCount] = useState(0)
     const [rollCount, setRollCount] = useState(0)
 
+    // calls function everytime rollCount changes
     useEffect(() => {
-        handleNRolls(rollCount)
-    }, [rollCount, tenPityCount, ninetyPityCount])
+        tenRoll(rollCount)
+    }, [rollCount])
 
     // handler for single roll
     const handleSingleRoll = () => {
@@ -62,7 +63,7 @@ export default function Rolls(props) {
         }
     }
 
-    const handleNRolls = () => {
+    const tenRoll = () => {
         if (rollCount === 0) {
             return
         }
@@ -78,6 +79,7 @@ export default function Rolls(props) {
             setRoll(fourStarData[randomFourStar].name)
             setTenPityCount(0)
             console.log('obtained a 4 star through pity')
+            setRollCount(rollCount - 1)
             return;
         }
 
@@ -86,6 +88,7 @@ export default function Rolls(props) {
             setRoll(fiveStarData[randomFiveStar].name)
             setNinetyPityCount(0)
             console.log('obtained a 5 star through pity')
+            setRollCount(rollCount - 1)
             return;
         } 
 
@@ -113,12 +116,6 @@ export default function Rolls(props) {
     }
     
     const handleTenRoll = () => {
-        for (let i = 0; i < 10; i++) {
-            handleSingleRoll()
-        }
-    }
-    
-    const handleNRoll = () => {
         setRollCount(10)
     }
     return (
@@ -127,7 +124,6 @@ export default function Rolls(props) {
             <span>
                 <button onClick={handleSingleRoll} className='btn btn-primary mr-2'>Wish x1</button>
                 <button onClick={handleTenRoll} className='btn btn-primary mr-2'>Wish x10</button>
-                <button onClick={handleNRoll} className='btn btn-primary mr-2'>Wish xN</button>
                 <button className='btn btn-danger'>Reset</button>
             </span>
         </div>

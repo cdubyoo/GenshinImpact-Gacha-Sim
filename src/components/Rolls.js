@@ -13,7 +13,7 @@ export default function Rolls(props) {
 
     useEffect(() => {
         handleNRolls(rollCount)
-    }, [rollCount])
+    }, [rollCount, tenPityCount, ninetyPityCount])
 
     // handler for single roll
     const handleSingleRoll = () => {

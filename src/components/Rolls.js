@@ -81,6 +81,7 @@ export default function Rolls() {
         // check if ten pity count has hit
         if (tenPityCount === 9) {
             setTenPityCount(0)
+            setNinetyPityCount(prevState => prevState +1)
             setCurrentRolls(prevState => [...prevState, newFourStar])
             setTotalRolls(prevState => prevState +1)
             // checks to see if item already in inventory
@@ -225,6 +226,7 @@ export default function Rolls() {
         // check if ten pity count has hit
         if (tenPityCount === 9) {
             setTenPityCount(0)
+            setNinetyPityCount(prevState => prevState +1)
             setRollCount(rollCount - 1)
             setCurrentRolls(prevState => [...prevState, newFourStar])
             setTotalRolls(prevState => prevState +1)

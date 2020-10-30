@@ -6,11 +6,10 @@ import Rolls from './components/Rolls'
 function App() {
   return (
     <>
-    <div className="App-header">
-      <Rollresult />
-      <Rolls />
-      
-      </div>
+    <div className="">
+        <Rollresult />
+        <Rolls />
+    </div>
     </>
   );
 }

@@ -18,16 +18,19 @@ export default function Rolls() {
     
 
     // inventory state
-    const [inventoryImageArray, setInventoryImageArray] = useState([])
+    const [currentRolls, setCurrentRolls] = useState([])
     const [inventoryNameArray, setInventoryNameArray] = useState([])
 
     const itemNames = inventoryNameArray.map((name) => 
         <td>{name}</td>
     )
 
-    const itemImages = inventoryImageArray.map((image) => 
-        <td><img src={image}></img></td>
+    const itemImages = currentRolls.map((image) => 
+    <div className="col col-sm-auto">
+        <img src={image} className="item"/>
+    </div>
     )
+       
 
     // calls function everytime rollCount changes, decrement each time from 10
     useEffect(() => {
@@ -48,13 +51,16 @@ export default function Rolls() {
         const newFiveStar = fiveStarData[randomFiveStar]
         const newFourStar = fourStarData[randomFourStar]
         const newThreeStar = threeStarData[randomThreeStar]
+
+        // reset roll result
+        setCurrentRolls([])
         
         // check if ten pity count has hit
         if (tenPityCount === 9) {
             setRoll(fourStarData[randomFourStar].name)
             setTenPityCount(0)
             console.log('obtained a 4 star through pity')
-            setInventoryImageArray(prevState => [...prevState, newFourStar.image])
+            setCurrentRolls(prevState => [...prevState, newFourStar.image])
             setInventoryNameArray(prevState => [...prevState, newFourStar.name])
             return;
         } 
@@ -64,7 +70,7 @@ export default function Rolls() {
             setRoll(fiveStarData[randomFiveStar].name)
             setNinetyPityCount(0)
             console.log('obtained a 5 star through pity')
-            setInventoryImageArray(prevState => [...prevState, newFiveStar.image])
+            setCurrentRolls(prevState => [...prevState, newFiveStar.image])
             setInventoryNameArray(prevState => [...prevState, newFiveStar.name])
             return;
         } 
@@ -89,7 +95,7 @@ export default function Rolls() {
             setNinetyPityCount(prevState => prevState +1)
             console.log('obtained a 3 star, pity counter ++')
         } 
-        setInventoryImageArray(prevState => [...prevState, newThreeStar.image])
+        setCurrentRolls(prevState => [...prevState, newThreeStar.image])
         setInventoryNameArray(prevState => [...prevState, newThreeStar.name])
     }
 
@@ -100,6 +106,11 @@ export default function Rolls() {
         // if roll count hits 0, stop function
         if (rollCount === 0) {
             return
+        }
+
+        // reset roll result on every roll
+        if (rollCount === 10) {
+            setCurrentRolls([])
         }
         // sets the main rolling RNG
         const rng = Math.floor(Math.random() * 1000) +1
@@ -118,7 +129,7 @@ export default function Rolls() {
             setTenPityCount(0)
             console.log('obtained a 4 star through pity')
             setRollCount(rollCount - 1)
-            setInventoryImageArray(prevState => [...prevState, newFourStar.image])
+            setCurrentRolls(prevState => [...prevState, newFourStar.image])
             setInventoryNameArray(prevState => [...prevState, newFourStar.name])
             return;
         }
@@ -129,7 +140,7 @@ export default function Rolls() {
             setNinetyPityCount(0)
             console.log('obtained a 5 star through pity')
             setRollCount(rollCount - 1)
-            setInventoryImageArray(prevState => [...prevState, newFiveStar.image])
+            setCurrentRolls(prevState => [...prevState, newFiveStar.image])
             setInventoryNameArray(prevState => [...prevState, newFiveStar.name])
             return;
         } 
@@ -154,7 +165,7 @@ export default function Rolls() {
             console.log('obtained a 3 star, pity counter ++')
         }
         setRollCount(rollCount - 1)
-        setInventoryImageArray(prevState => [...prevState, newThreeStar.image])
+        setCurrentRolls(prevState => [...prevState, newThreeStar.image])
         setInventoryNameArray(prevState => [...prevState, newThreeStar.name])
 
     }
@@ -170,7 +181,7 @@ export default function Rolls() {
         setRoll(null)
         setTenPityCount(0)
         setNinetyPityCount(0)
-        setInventoryImageArray([])
+        setCurrentRolls([])
         setInventoryNameArray([])
     }
 
@@ -189,17 +200,12 @@ export default function Rolls() {
                Ninety Pity Count = {ninetyPityCount}
             <br></br>
                 Current Roll = {roll}
-            <div>
-            <table className="table table-bordered table-dark">
-                <tbody>
-                    <tr>
-                    <td>{itemNames}</td>
-                    </tr>
-                    <tr>
-                    <td><img src={itemImages}></img></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className="container">
+                <div className="row">
+                    
+                    {itemImages}
+                    
+                </div>
             </div>
         </div>
         </>

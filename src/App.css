@@ -25,3 +25,10 @@
     transform: rotate(360deg);
   }
 }
+
+.item {
+  height: auto; 
+  width: auto; 
+  max-width: 120px; 
+  max-height: 120px;
+}

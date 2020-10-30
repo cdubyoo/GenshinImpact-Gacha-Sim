@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import Rolls from './components/Rolls'
 
 function App() {
   return (
     <>
-    <div className="container">
+    <div className="App">
         <Rolls />
     </div>
     </>

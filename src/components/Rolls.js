@@ -352,8 +352,9 @@ export default function Rolls() {
 
     return (
         <>
-        <img src="https://www.freemmostation.com/wp-content/uploads/2020/10/Wanderlust-Banner.jpg"/>
+        
         <div className="container">
+        <img className="ml-3 pl-1" src="https://www.freemmostation.com/wp-content/uploads/2020/10/Wanderlust-Banner.jpg"/>
             <div className="row">
                 <div className="col-8 pt-1">
                     <span>

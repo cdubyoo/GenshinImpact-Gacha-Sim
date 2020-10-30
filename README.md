@@ -1,6 +1,6 @@
 ## A Genshin Impact(popular videogame) Gacha Simulator
 
-## This app will simulate the gacha system from the game, with its corresponding rates.
+This app will simulate the gacha system from the game, with its corresponding rates.
 
 ## Live demo: https://genshin-impact-gacha-sim.d2isukluzqlv14.amplifyapp.com/
 

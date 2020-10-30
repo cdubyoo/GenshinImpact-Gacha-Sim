@@ -358,8 +358,8 @@ export default function Rolls() {
             <div className="row">
                 <div className="col-8 pt-1">
                     <span>
-                        <button onClick={handleSingleRoll} className='btn btn-primary mr-2'>Wish x1</button>
-                        <button onClick={handleTenRoll} className='btn btn-primary mr-2'>Wish x10</button>
+                        <button onClick={handleSingleRoll} className='btn btn-info mr-2'>Wish x1</button>
+                        <button onClick={handleTenRoll} className='btn btn-info mr-2'>Wish x10</button>
                         <button onClick={handleReset} className='btn btn-danger'>Reset</button>
                     </span>
                     <div>
@@ -377,7 +377,7 @@ export default function Rolls() {
                 </div>
 
                 <div className="col-4 pt-1">
-                    <span className="d-block p-2 bg-primary text-white">
+                    <span className="d-block p-2 bg-info text-white">
                         Inventory
                         <span className='float-right'>
                             Spent : ${totalRolls * 2}

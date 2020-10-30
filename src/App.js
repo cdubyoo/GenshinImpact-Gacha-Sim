@@ -6,7 +6,7 @@ import Rolls from './components/Rolls'
 function App() {
   return (
     <>
-    <div className="">
+    <div className="container">
         <Rollresult />
         <Rolls />
     </div>

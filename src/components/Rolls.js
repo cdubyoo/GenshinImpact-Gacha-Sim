@@ -19,10 +19,14 @@ export default function Rolls() {
 
     // inventory state
     const [currentRolls, setCurrentRolls] = useState([])
-    const [inventoryNameArray, setInventoryNameArray] = useState([])
 
-    const itemNames = inventoryNameArray.map((name) => 
-        <td>{name}</td>
+    const rollResults = currentRolls.map((item) => 
+        <div className="col col-sm-auto">
+            <figure>
+                <img src={item.image} className="item"/>
+                <figcaption>{item.name}</figcaption>
+            </figure>
+        </div>
     )
 
     const itemImages = currentRolls.map((image) => 
@@ -52,7 +56,7 @@ export default function Rolls() {
         const newFourStar = fourStarData[randomFourStar]
         const newThreeStar = threeStarData[randomThreeStar]
 
-        // reset roll result
+        // reset roll result on new roll
         setCurrentRolls([])
         
         // check if ten pity count has hit
@@ -61,7 +65,7 @@ export default function Rolls() {
             setTenPityCount(0)
             console.log('obtained a 4 star through pity')
             setCurrentRolls(prevState => [...prevState, newFourStar.image])
-            setInventoryNameArray(prevState => [...prevState, newFourStar.name])
+            setCurrentRolls(prevState => [...prevState, newFourStar])
             return;
         } 
 
@@ -71,7 +75,7 @@ export default function Rolls() {
             setNinetyPityCount(0)
             console.log('obtained a 5 star through pity')
             setCurrentRolls(prevState => [...prevState, newFiveStar.image])
-            setInventoryNameArray(prevState => [...prevState, newFiveStar.name])
+            setCurrentRolls(prevState => [...prevState, newFiveStar])
             return;
         } 
 
@@ -96,7 +100,7 @@ export default function Rolls() {
             console.log('obtained a 3 star, pity counter ++')
         } 
         setCurrentRolls(prevState => [...prevState, newThreeStar.image])
-        setInventoryNameArray(prevState => [...prevState, newThreeStar.name])
+        setCurrentRolls(prevState => [...prevState, newThreeStar])
     }
 
     
@@ -108,10 +112,11 @@ export default function Rolls() {
             return
         }
 
-        // reset roll result on every roll
+        // reset roll result on every try
         if (rollCount === 10) {
             setCurrentRolls([])
         }
+
         // sets the main rolling RNG
         const rng = Math.floor(Math.random() * 1000) +1
         // pulls a random item from the data set for each star rating
@@ -129,8 +134,7 @@ export default function Rolls() {
             setTenPityCount(0)
             console.log('obtained a 4 star through pity')
             setRollCount(rollCount - 1)
-            setCurrentRolls(prevState => [...prevState, newFourStar.image])
-            setInventoryNameArray(prevState => [...prevState, newFourStar.name])
+            setCurrentRolls(prevState => [...prevState, newFourStar])
             return;
         }
 
@@ -140,8 +144,7 @@ export default function Rolls() {
             setNinetyPityCount(0)
             console.log('obtained a 5 star through pity')
             setRollCount(rollCount - 1)
-            setCurrentRolls(prevState => [...prevState, newFiveStar.image])
-            setInventoryNameArray(prevState => [...prevState, newFiveStar.name])
+            setCurrentRolls(prevState => [...prevState, newFiveStar])
             return;
         } 
 
@@ -165,8 +168,7 @@ export default function Rolls() {
             console.log('obtained a 3 star, pity counter ++')
         }
         setRollCount(rollCount - 1)
-        setCurrentRolls(prevState => [...prevState, newThreeStar.image])
-        setInventoryNameArray(prevState => [...prevState, newThreeStar.name])
+        setCurrentRolls(prevState => [...prevState, newThreeStar])
 
     }
     
@@ -182,7 +184,7 @@ export default function Rolls() {
         setTenPityCount(0)
         setNinetyPityCount(0)
         setCurrentRolls([])
-        setInventoryNameArray([])
+        setCurrentRolls([])
     }
 
     return (
@@ -202,9 +204,7 @@ export default function Rolls() {
                 Current Roll = {roll}
             <div className="container">
                 <div className="row">
-                    
-                    {itemImages}
-                    
+                    {rollResults}
                 </div>
             </div>
         </div>

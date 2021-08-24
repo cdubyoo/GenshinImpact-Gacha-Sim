@@ -1,4 +1,4 @@
-## A Genshin Impact(popular videogame) Gacha Simulator
+## A Genshin Impact(a popular mobile videogame) Gacha Simulator
 
 This app will simulate the gacha system from the game, with its corresponding rates.
 
